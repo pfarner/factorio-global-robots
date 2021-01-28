@@ -7,5 +7,5 @@
   "homepage": "https://github.com/pfarner/factorio-global-robots",
   "factorio_version": "1.1",
   "dependencies": ["base >= 1.1"],
-  "description": "Provides a combinator that provides global bot statistics to the circuit network."
+  "description": "Provides a combinator that provides global robot statistics to the circuit network."
 }

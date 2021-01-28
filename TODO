@@ -1,3 +1,10 @@
 restrict to object's force
 
 allow reporting on roboports and/or players
+
+look into event-based updates
+
+add global toggle
+
+make signals configurable
+

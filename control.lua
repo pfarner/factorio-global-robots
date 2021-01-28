@@ -30,7 +30,8 @@ local function scan(types)
           end
           if #ids then
             table.sort(ids)
-            netStats[ids[#ids]] = { 1, network.all_logistic_robots, network.all_construction_robots, network.available_logistic_robots, network.available_construction_robots }
+            netStats[ids[#ids]] = { 1, network.all_logistic_robots, network.all_construction_robots,
+	      network.available_logistic_robots, network.available_construction_robots }
           end
         end
       end
@@ -44,13 +45,28 @@ local function scan(types)
   return total
 end
 
-script.on_nth_tick(5*60, -- 5 seconds * 60 ticks/second
+script.on_nth_tick(1*60, -- 1 seconds * 60 ticks/second
   function(event)
     local stats = scan(types)
-    if stats then
+    if False and stats then
       game.print("Found "
         .. stats[1] .. " networks with "
         .. stats[2] .. " logistics robots (" .. stats[4] .. " idle) and "
         .. stats[3] .. " construction robots (" .. stats[5] .. " idle)")
+    end
+    if game then -- otherwise, not yet initialized
+      for _, surface in pairs(game.surfaces) do
+        for _, entity in pairs(surface.find_entities_filtered{name="global-robots-combinator"}) do
+	  if entity.valid then
+            local signals = { }
+            signals[#signals+1] = {index = #signals+1, signal = {type="virtual", name="signal-N"}, count = stats[1]}
+            signals[#signals+1] = {index = #signals+1, signal = {type="virtual", name="signal-L"}, count = stats[2]}
+            signals[#signals+1] = {index = #signals+1, signal = {type="virtual", name="signal-C"}, count = stats[3]}
+            signals[#signals+1] = {index = #signals+1, signal = {type="virtual", name="signal-M"}, count = stats[4]}
+            signals[#signals+1] = {index = #signals+1, signal = {type="virtual", name="signal-D"}, count = stats[5]}
+            entity.get_control_behavior().parameters = signals
+	  end
+	end
+      end
     end
   end)
