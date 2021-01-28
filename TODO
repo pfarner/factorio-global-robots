@@ -1,10 +1,9 @@
 restrict to object's force
 
-allow reporting on roboports and/or players
+allow reporting on roboports and/or players (changing the object types per combinator)
 
-look into event-based updates
+look into event-based updates (created combinator, bot deployed, bot returned, etc.) if possible, with sparse time-based true-up
 
 add global toggle
 
-make signals configurable
-
+make signal symbols configurable

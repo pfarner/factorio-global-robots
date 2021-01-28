@@ -13,7 +13,7 @@ end
 -- returns {#networks, all_logistics, all_construction, idle_logistics, idle_construction}
 -- for the specified object types
 local function scan(types)
-  -- set up results and dictionary to hold distinct counts per network
+  -- set up results and dictionary to hold distinct statistics per network
   local total, netStats = { 0, 0, 0, 0, 0 }, {}
   -- for each surface, find all relevant entities
   if game then -- otherwise, not yet initialized
